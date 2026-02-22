@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import Navbar from './WebPage/Navbar'
 import Banner from './WebPage/Banner'
+import Skills from './WebPage/Skills'
+import Prog from './WebPage/Prog'
+import Contacts from './WebPage/Contacts'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Navbar></Navbar>
-      {/* <Banner></Banner> */}
+      <Banner></Banner>
+      <Skills></Skills>
+      <Prog></Prog>
+      <Contacts></Contacts>
 
     </>
   )

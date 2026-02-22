@@ -1,97 +1,87 @@
-import React from 'react'
-import './Style.css'
+import React, { useState } from "react";
+
 export default function Navbar() {
+    const [open, setOpen] = useState(false);
+
     return (
-        <div id="main">
-            <div class="pic">
-                <div id="text">
-                    <h1>Kamrul <br />Hasan Faysal</h1>
-                    <div id="intro">
-                        <h3>Frontend <br /><span id="pg">DEVELOPER</span></h3>
-                    </div>
-                </div>
-            </div>
-            <div id="about">
-                <h3>About me...</h3>
-                <p>
-                    I'm a passionate software developer with a strong foundation in Java,
-                    web development, and embedded systems. Currently, I'm studying
-                    Software Engineering at DFID International University in Bangladesh. I
-                    enjoy solving real-world problems through code and constantly strive
-                    to improve my skills. I've built several projects, including
-                    Arduino-based systems, Java console applications, and responsive
-                    front-end interfaces. I'm also actively involved in programming
-                    contests on platforms like Codeforces and Beecrowd. To track my
-                    learning journey and share my progress, I contribute to GitHub on a
-                    daily basis. I'm eager to join a forward-thinking team where I can
-                    continue to grow and create impactful software solutions.
-                </p>
-            </div>
-            <section class="card">
-                <h2>Skills</h2>
+        <nav className="w-full fixed top-0 left-0 #272b3b backdrop-blur-md text-white z-50 shadow-md">
+            <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-                <div id="sec">
-                    <div id="box1">
-                        <h3>Product <br /><b>DESIGN</b></h3>
-                        <p>
-                            I'm a product designer focused on creating intuitive,
-                            user-centered digital experiences. I turn complex problems into
-                            elegant, functional designs through collaboration and creativity.
-                            My goal is to build impactful products that are both accessible
-                            and visually engaging.
-                        </p>
-                    </div>
-                    <div id="box2">
-                        <h3>Frontend <br /><b>DEVELOPMENT</b></h3>
-                        <p>
-                            I'm a front-end developer dedicated to building responsive,
-                            user-friendly web interfaces. I turn design concepts into
-                            interactive, high-performance websites using modern technologies.
-                            My focus is on clean code, seamless user experience, and
-                            cross-platform compatibility.
-                        </p>
-                    </div>
-                </div>
-            </section>
+                {/* Logo / Name */}
+                <h1 className="text-2xl md:text-1xl font-light text-white-700 tracking-wide text-black">
+                    k<span className="text-red-700">h</span>
+                </h1>
 
-            <section class="progress">
-                <h2>Progress</h2>
-                <div id="pro">
-                    <div id="Code">
-                        <h3>Codeforces</h3>
-                        <a href="https://codeforces.com/profile/khfaysal">
-                            <img src="/Img/codeForces.png" alt=""
-                            /></a>
-                    </div>
-                    <div id="Bee">
-                        <h3>BeeCrowd</h3>
-                        <br />
-                        <a href="https://judge.beecrowd.com/en/profile/892863"
-                        ><img src="/Img/beeCrowd.png" alt=""
-                            /></a>
-                    </div>
-                    <div id="Git">
-                        <h3>Github</h3>
-                        <a href="https://github.com/khfaysal"
-                        ><img src="/Img/github.png" alt=""
-                            /></a>
-                    </div>
-                </div>
-            </section>
+                {/* Desktop Menu */}
+                <ul className="hidden md:flex gap-8 text-sm font-medium">
+                    <li>
+                        <a href="#main" className="hover:text-blue-400 transition">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#about" className="hover:text-blue-400 transition">
+                            About
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#skills" className="hover:text-blue-400 transition">
+                            Skills
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#progress" className="hover:text-blue-400 transition">
+                            Progress
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cont" className="hover:text-blue-400 transition">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
 
-            <div id="cont">
-                <h2>Contacts</h2>
-                <br />
-                <b class="ri-phone-fill"> 01521775078</b>
-                <br />
-                <i class="ri-mail-line"></i>
-                <a href="k.hasanfaysal@gmail.com">k.hasanfaysal@gmail.com</a>
-                <br />
-                <i class="ri-linkedin-box-fill"></i>
-                <a href="https://www.linkedin.com/in/kamrulhasanfaysal/"
-                >Kamrul Hasan</a
+                {/* Mobile Button */}
+                <button
+                    onClick={() => setOpen(!open)}
+                    className="md:hidden text-2xl"
                 >
+                    ☰
+                </button>
             </div>
-        </div>
-    )
+
+            {/* Mobile Menu */}
+            {open && (
+                <div className="md:hidden bg-black/95 px-6 pb-4">
+                    <ul className="flex flex-col gap-4 text-sm font-medium">
+                        <li>
+                            <a href="#main" onClick={() => setOpen(false)}>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#about" onClick={() => setOpen(false)}>
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#skills" onClick={() => setOpen(false)}>
+                                Skills
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#progress" onClick={() => setOpen(false)}>
+                                Progress
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#cont" onClick={() => setOpen(false)}>
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            )}
+        </nav>
+    );
 }
