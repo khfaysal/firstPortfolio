@@ -117,7 +117,9 @@ const AdminDashboard = () => {
 
       if (!res.ok) throw new Error('Failed to upload image');
       const data = await res.json();
-      return data.secure_url;
+      // Ensure we use https secure URL format
+      const secureUrl = data.secure_url || data.url;
+      return secureUrl.replace(/^http:/, 'https:');
     } catch (err) {
       console.error('Cloudinary upload error:', err);
       throw err;
