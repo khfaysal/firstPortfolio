@@ -150,9 +150,9 @@ const AdminDashboard = () => {
 
     setUploading(true);
     try {
-      // Limit to 10 images
+      // Limit to 10 images and resolve all uploads in parallel
       const uploadPromises = files.slice(0, 10).map(file => uploadImageToCloudinary(file));
-      const urls = await uploadPromises;
+      const urls = await Promise.all(uploadPromises);
       
       const currentScreenshots = projectForm.screenshots
         ? projectForm.screenshots.split(',').map(s => s.trim()).filter(Boolean)
