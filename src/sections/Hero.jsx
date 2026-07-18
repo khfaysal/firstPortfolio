@@ -20,17 +20,6 @@ const Hero = () => {
       <div className="absolute bottom-20 left-0 w-[400px] h-[400px] bg-violet-accent/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-purple-dark/15 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Mini top banner text matching reference */}
-      <div className="w-full max-w-[1400px] mx-auto px-6 py-2 flex justify-between items-center text-[10px] uppercase tracking-[0.2em] text-text-muted font-mono relative z-40">
-        <div className="flex items-center gap-2">
-          <span className="w-4 h-[1px] bg-text-muted"></span>
-          <span>Creative Developer</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span>Available for Freelance</span>
-          <span className="text-purple-primary">✦</span>
-        </div>
-      </div>
 
       {/* Main Content Area */}
       <div className="max-w-[1400px] w-full mx-auto px-6 relative flex-grow flex flex-col justify-center my-auto z-10">
