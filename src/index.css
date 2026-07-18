@@ -3,7 +3,7 @@
 
 @theme {
   /* Background colors */
-  --color-bg-primary: #0a0a0a;
+  --color-bg-primary: transparent;
   --color-bg-card: #141414;
   --color-bg-card-hover: #1a1a1a;
   --color-bg-elevated: #1e1e1e;
@@ -43,7 +43,9 @@
   }
 
   body {
-    background-color: #0a0a0a;
+    background-color: #08070b;
+    background-image: radial-gradient(rgba(168, 85, 247, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
     color: #a1a1aa;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
