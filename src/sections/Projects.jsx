@@ -1,119 +1,124 @@
-import React, { useState } from 'react';
-import ProjectCard from '../components/ProjectCard';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ProjectCard from '../components/ProjectCard';
 
-// Sample data - You can replace this with your actual projects later
-const projectsData = [
-  {
-    id: 1,
-    title: 'E-Commerce Dashboard',
-    description: 'A full-stack admin dashboard for managing inventory, tracking sales, and analyzing customer data with real-time charts.',
-    tags: ['React', 'Node.js', 'PostgreSQL', 'Tailwind'],
-    category: 'Full Stack',
-    githubLink: 'https://github.com',
-    liveLink: 'https://example.com'
-  },
-  {
-    id: 2,
-    title: 'Crypto Tracker Pro',
-    description: 'Real-time cryptocurrency tracking application featuring live WebSocket feeds, portfolio management, and advanced charting.',
-    tags: ['Next.js', 'TypeScript', 'WebSockets', 'Framer Motion'],
-    category: 'Frontend',
-    githubLink: 'https://github.com',
-    liveLink: 'https://example.com'
-  },
-  {
-    id: 3,
-    title: 'Neural Style Transfer API',
-    description: 'A RESTful API wrapper around a PyTorch machine learning model that applies artistic styles to user-uploaded images.',
-    tags: ['Python', 'FastAPI', 'PyTorch', 'Docker'],
-    category: 'Backend',
-    githubLink: 'https://github.com'
-  },
-  {
-    id: 4,
-    title: 'Terminal Portfolio',
-    description: 'An interactive portfolio website built entirely to look and function like a MacOS terminal environment.',
-    tags: ['React', 'CSS Modules', 'Zustand'],
-    category: 'Frontend',
-    githubLink: 'https://github.com',
-    liveLink: 'https://example.com'
-  }
-];
-
-const categories = ['All', 'Frontend', 'Backend', 'Full Stack'];
+const FEATURED_COUNT = 3;
 
 const Projects = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [projects, setProjects] = useState([]);
+  const [showAll, setShowAll] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const filteredProjects = projectsData.filter(project => {
-    if (activeCategory === 'All') return true;
-    return project.category === activeCategory;
-  });
+  // Load projects from Firestore
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
+        const { db } = await import('../firebase');
+        
+        const q = query(collection(db, 'projects'), orderBy('order', 'asc'));
+        const snapshot = await getDocs(q);
+        
+        if (!snapshot.empty) {
+          const firestoreProjects = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setProjects(firestoreProjects);
+        }
+      } catch (err) {
+        console.error('Error loading projects:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProjects();
+  }, []);
+
+  const featuredProjects = projects.filter(p => p.featured).slice(0, FEATURED_COUNT);
+  const additionalProjects = projects.filter(p => !featuredProjects.find(f => f.id === p.id));
+  const displayedProjects = showAll ? projects : featuredProjects;
 
   return (
-    <section id="projects" className="py-24 relative z-10 bg-tech-bg/50 backdrop-blur-sm">
-      <div className="container mx-auto px-6">
-        
+    <section id="projects" className="relative section-padding bg-bg-primary">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-primary/20 to-transparent" />
+
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 flex items-center">
-            <span className="text-tech-primary font-mono text-2xl md:text-4xl mr-4">01.</span> 
-            Featured Projects
-          </h2>
-          <div className="h-1 w-24 bg-tech-secondary rounded-full"></div>
-        </div>
-
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-4 mb-12">
-          {categories.map((category) => (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex items-end justify-between mb-12"
+        >
+          <div>
+            <h2 className="text-3xl md:text-5xl font-heading font-bold text-text-primary uppercase tracking-tight">
+              Featured <span className="text-gradient-purple">Projects</span>
+            </h2>
+            <div className="h-1 w-16 bg-gradient-purple rounded-full mt-3" />
+          </div>
+          {additionalProjects.length > 0 && (
             <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-5 py-2 rounded-full font-mono text-sm transition-all duration-300 ${
-                activeCategory === category
-                  ? 'bg-tech-primary/20 text-tech-primary border border-tech-primary/50 shadow-[0_0_10px_rgba(0,255,204,0.3)]'
-                  : 'bg-transparent text-gray-400 border border-gray-700 hover:border-gray-500 hover:text-gray-200'
-              }`}
+              onClick={() => setShowAll(!showAll)}
+              className="text-purple-light text-sm font-medium hover:text-text-primary transition-colors group flex items-center gap-2"
             >
-              {category}
+              {showAll ? 'Show Less' : 'View All Projects'}
+              <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
             </button>
-          ))}
-        </div>
-
-        {/* Projects Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          <AnimatePresence mode='popLayout'>
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                key={project.id}
-              >
-                <ProjectCard 
-                  title={project.title}
-                  description={project.description}
-                  tags={project.tags}
-                  githubLink={project.githubLink}
-                  liveLink={project.liveLink}
-                  index={index}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          )}
         </motion.div>
 
-        {/* View More CTA */}
-        <div className="mt-16 text-center text-gray-400 font-mono text-sm">
-          <p>This is just a selection of my recent work.</p>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-tech-primary hover:text-white transition-colors underline decoration-tech-primary/30 hover:decoration-white underline-offset-4">
-            View full archive on GitHub →
-          </a>
-        </div>
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-purple-primary/30 border-t-purple-primary rounded-full animate-spin" />
+          </div>
+        ) : projects.length === 0 ? (
+          <div className="glass-card rounded-2xl p-12 text-center border border-border-default/50">
+            <p className="text-text-muted text-base">No projects added yet.</p>
+            <p className="text-text-muted/60 text-xs mt-1">Please log in to the admin panel to add your projects.</p>
+          </div>
+        ) : (
+          /* Projects Grid */
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {displayedProjects.map((project, index) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  key={project.id}
+                >
+                  <ProjectCard project={project} index={index} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
 
+        {/* See More hint */}
+        {!showAll && additionalProjects.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mt-10 text-center"
+          >
+            <button
+              onClick={() => setShowAll(true)}
+              className="px-8 py-3 rounded-full border border-purple-primary/30 text-purple-light text-sm font-medium hover:bg-purple-primary/10 hover:border-purple-primary/50 transition-all duration-300 group"
+            >
+              See More Projects
+              <span className="inline-block ml-2 group-hover:translate-y-0.5 transition-transform">↓</span>
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
