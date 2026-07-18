@@ -154,9 +154,14 @@ const AdminDashboard = () => {
       const uploadPromises = files.slice(0, 10).map(file => uploadImageToCloudinary(file));
       const urls = await Promise.all(uploadPromises);
       
-      const currentScreenshots = projectForm.screenshots
-        ? projectForm.screenshots.split(',').map(s => s.trim()).filter(Boolean)
-        : [];
+      let currentScreenshots = [];
+      if (projectForm.screenshots) {
+        if (Array.isArray(projectForm.screenshots)) {
+          currentScreenshots = projectForm.screenshots;
+        } else if (typeof projectForm.screenshots === 'string') {
+          currentScreenshots = projectForm.screenshots.split(',').map(s => s.trim()).filter(Boolean);
+        }
+      }
       
       const combined = [...currentScreenshots, ...urls].slice(0, 10);
       const screenshotsString = combined.join(', ');
@@ -437,6 +442,7 @@ const AdminDashboard = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                           <InputField label="Title *" name="title" value={projectForm.title} onChange={handleProjectChange} placeholder="Project name" required />
                           <InputField label="Category" name="category" value={projectForm.category} onChange={handleProjectChange} placeholder="e.g. Web Design & Development" />
+                          
                           <div className="md:col-span-2">
                             <TextareaField label="Description" name="description" value={projectForm.description} onChange={handleProjectChange} placeholder="Brief description..." />
                           </div>
@@ -452,12 +458,17 @@ const AdminDashboard = () => {
                               </label>
                               <input
                                 name="thumbnail"
-                                value={projectForm.thumbnail}
+                                value={projectForm.thumbnail || ''}
                                 onChange={handleProjectChange}
                                 className="flex-1 px-4 py-2.5 rounded-xl bg-bg-elevated/40 border border-border-default text-text-primary text-xs focus:border-purple-primary/50 focus:outline-none transition-colors"
                                 placeholder="Or paste image URL"
                               />
                             </div>
+                            {projectForm.thumbnail && (
+                              <div className="mt-2 w-20 h-20 rounded-lg overflow-hidden border border-border-default">
+                                <img src={projectForm.thumbnail} alt="Preview" className="w-full h-full object-cover" />
+                              </div>
+                            )}
                           </div>
 
                           <InputField label="Tech Tags" name="tags" value={projectForm.tags} onChange={handleProjectChange} placeholder="React, Node.js (comma separated)" />
@@ -473,12 +484,26 @@ const AdminDashboard = () => {
                               </label>
                               <input
                                 name="screenshots"
-                                value={projectForm.screenshots}
+                                value={Array.isArray(projectForm.screenshots) ? projectForm.screenshots.join(', ') : projectForm.screenshots || ''}
                                 onChange={handleProjectChange}
                                 className="flex-1 px-4 py-2.5 rounded-xl bg-bg-elevated/40 border border-border-default text-text-primary text-xs focus:border-purple-primary/50 focus:outline-none transition-colors"
                                 placeholder="Comma separated URLs"
                               />
                             </div>
+                            {projectForm.screenshots && (
+                              <div className="flex flex-wrap gap-2 mt-2">
+                                {(Array.isArray(projectForm.screenshots) 
+                                  ? projectForm.screenshots 
+                                  : typeof projectForm.screenshots === 'string'
+                                    ? projectForm.screenshots.split(',').map(s => s.trim()).filter(Boolean)
+                                    : []
+                                ).map((url, idx) => (
+                                  <div key={idx} className="relative w-16 h-12 rounded-lg overflow-hidden border border-border-default group">
+                                    <img src={url} alt={`Screenshot Preview ${idx + 1}`} className="w-full h-full object-cover" />
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </div>
 
                           <InputField label="GitHub Link" name="githubLink" value={projectForm.githubLink} onChange={handleProjectChange} placeholder="https://github.com/..." />
@@ -504,7 +529,7 @@ const AdminDashboard = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
- 
+
                 {/* Project List */}
                 {projects.length === 0 ? (
                   <EmptyState text="No projects yet" sub='Click "Add Project" to create your first project.' />
