@@ -29,13 +29,11 @@ const Experience = () => {
         const q = query(collection(db, 'experiences'), orderBy('order', 'asc'));
         const snapshot = await getDocs(q);
         
-        if (!snapshot.empty) {
-          const firestoreExperiences = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setExperiences(firestoreExperiences);
-        }
+        const firestoreExperiences = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setExperiences(firestoreExperiences);
       } catch (err) {
         console.error('Error loading experiences:', err);
       } finally {

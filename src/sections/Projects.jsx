@@ -19,13 +19,11 @@ const Projects = () => {
         const q = query(collection(db, 'projects'), orderBy('order', 'asc'));
         const snapshot = await getDocs(q);
         
-        if (!snapshot.empty) {
-          const firestoreProjects = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setProjects(firestoreProjects);
-        }
+        const firestoreProjects = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProjects(firestoreProjects);
       } catch (err) {
         console.error('Error loading projects:', err);
       } finally {
