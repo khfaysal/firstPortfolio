@@ -14,7 +14,7 @@ import {
 
 // Cloudinary Configuration
 const CLOUDINARY_CLOUD_NAME = 'dxj8esfzy';
-const CLOUDINARY_UPLOAD_PRESET = 'portfolio_preset'; // Default unsigned preset
+const CLOUDINARY_UPLOAD_PRESET = 'desPortfolio'; // User's custom unsigned preset
 
 // ─── Empty form defaults ────────────────────────────────────────────
 const emptyProject = {
