@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 
-const FEATURED_COUNT = 3;
+const FEATURED_COUNT = 4;
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -81,7 +81,7 @@ const Projects = () => {
           /* Projects Grid */
           <motion.div
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             <AnimatePresence mode="popLayout">
               {displayedProjects.map((project, index) => (
