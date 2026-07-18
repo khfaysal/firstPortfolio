@@ -159,9 +159,12 @@ const AdminDashboard = () => {
         : [];
       
       const combined = [...currentScreenshots, ...urls].slice(0, 10);
-      setProjectForm((prev) => ({ ...prev, screenshots: combined.join(', ') }));
+      const screenshotsString = combined.join(', ');
+      console.log('Saved Cloudinary URLs to state string:', screenshotsString);
+      setProjectForm((prev) => ({ ...prev, screenshots: screenshotsString }));
       showNotif('Screenshots uploaded successfully!');
-    } catch {
+    } catch (err) {
+      console.error('Error during screenshots upload process:', err);
       showNotif('Error uploading screenshots.');
     } finally {
       setUploading(false);
