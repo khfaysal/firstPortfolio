@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 
@@ -12,10 +13,16 @@ import ToolkitProcessCTA from './sections/ToolkitProcessCTA';
 import Experience from './sections/Experience';
 import Contact from './sections/Contact';
 
-// Admin
-import AdminLogin from './admin/AdminLogin';
-import AdminDashboard from './admin/AdminDashboard';
-import AdminRoute from './admin/AdminRoute';
+// Lazy Loaded Admin Components
+const AdminLogin = lazy(() => import('./admin/AdminLogin'));
+const AdminDashboard = lazy(() => import('./admin/AdminDashboard'));
+const AdminRoute = lazy(() => import('./admin/AdminRoute'));
+
+const PageLoader = () => (
+  <div className="min-h-screen bg-bg-primary flex items-center justify-center">
+    <div className="w-10 h-10 border-2 border-purple-primary/30 border-t-purple-primary rounded-full animate-spin" />
+  </div>
+);
 
 // Portfolio Home Page
 const PortfolioPage = () => (
@@ -34,24 +41,34 @@ const PortfolioPage = () => (
 
 function App() {
   return (
-    <AuthProvider>
-      <Routes>
-        {/* Portfolio */}
-        <Route path="/" element={<PortfolioPage />} />
+    <Routes>
+      {/* Portfolio */}
+      <Route path="/" element={<PortfolioPage />} />
 
-        {/* Admin */}
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route
-          path="/admin/dashboard"
-          element={
-            <AdminRoute>
-              <AdminDashboard />
-            </AdminRoute>
-          }
-        />
-      </Routes>
-    </AuthProvider>
+      {/* Admin - Lazy loaded with AuthProvider isolated here */}
+      <Route
+        path="/admin/*"
+        element={
+          <AuthProvider>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="" element={<AdminLogin />} />
+                <Route
+                  path="dashboard"
+                  element={
+                    <AdminRoute>
+                      <AdminDashboard />
+                    </AdminRoute>
+                  }
+                />
+              </Routes>
+            </Suspense>
+          </AuthProvider>
+        }
+      />
+    </Routes>
   );
 }
 
 export default App;
+

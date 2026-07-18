@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
-import profileImg from '../assets/Photo-2.png';
+import profileImg from '../assets/Photo-2.jpg';
 
 const stats = [
   { value: '1+', label: 'Years Experience' },
