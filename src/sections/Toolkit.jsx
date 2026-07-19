@@ -4,7 +4,9 @@ import {
 } from 'react-icons/fa';
 import {
   SiTypescript, SiNextdotjs, SiTailwindcss, SiFirebase, SiMongodb,
+  SiFigma
 } from 'react-icons/si';
+import { TbBrandAdobePhotoshop, TbBrandAdobeIllustrator, TbBrandAdobeIndesign } from 'react-icons/tb';
 
 const tools = [
   { name: 'HTML5', icon: <FaHtml5 /> },
@@ -19,6 +21,10 @@ const tools = [
   { name: 'Firebase', icon: <SiFirebase /> },
   { name: 'MongoDB', icon: <SiMongodb /> },
   { name: 'Python', icon: <FaPython /> },
+  { name: 'Photoshop', icon: <TbBrandAdobePhotoshop /> },
+  { name: 'Illustrator', icon: <TbBrandAdobeIllustrator /> },
+  { name: 'InDesign', icon: <TbBrandAdobeIndesign /> },
+  { name: 'Figma', icon: <SiFigma /> },
 ];
 
 const containerVariants = {

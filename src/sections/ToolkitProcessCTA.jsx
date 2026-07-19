@@ -4,9 +4,10 @@ import {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaPython, FaAws
 } from 'react-icons/fa';
 import {
-  SiTypescript, SiNextdotjs, SiTailwindcss, SiFirebase, SiMongodb, SiVercel, SiNetlify, SiCplusplus
+  SiTypescript, SiNextdotjs, SiTailwindcss, SiFirebase, SiMongodb, SiVercel, SiNetlify, SiCplusplus,
+  SiFigma
 } from 'react-icons/si';
-import { TbLetterC } from 'react-icons/tb';
+import { TbLetterC, TbBrandAdobePhotoshop, TbBrandAdobeIllustrator, TbBrandAdobeIndesign } from 'react-icons/tb';
 
 const tools = [
   { name: 'C', icon: <TbLetterC /> },
@@ -25,6 +26,10 @@ const tools = [
   { name: 'Vercel', icon: <SiVercel /> },
   { name: 'Netlify', icon: <SiNetlify /> },
   { name: 'AWS', icon: <FaAws /> },
+  { name: 'Photoshop', icon: <TbBrandAdobePhotoshop /> },
+  { name: 'Illustrator', icon: <TbBrandAdobeIllustrator /> },
+  { name: 'InDesign', icon: <TbBrandAdobeIndesign /> },
+  { name: 'Figma', icon: <SiFigma /> },
 ];
 
 const steps = [

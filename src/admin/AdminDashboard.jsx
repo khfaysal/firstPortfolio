@@ -323,7 +323,12 @@ const AdminDashboard = () => {
   //  RENDER
   // ═══════════════════════════════════════════════════════════════
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-bg-primary"
+    >
       {/* Notification */}
       <AnimatePresence>
         {notification && (
@@ -402,7 +407,11 @@ const AdminDashboard = () => {
                 PROJECTS TAB
             ═══════════════════════════════════════════════════════ */}
             {activeTab === 'projects' && (
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
                 {/* Action Bar */}
                 <div className="flex items-center justify-between mb-6">
                   <div>
@@ -551,14 +560,18 @@ const AdminDashboard = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </motion.div>
             )}
 
             {/* ═══════════════════════════════════════════════════════
                 EXPERIENCE TAB
             ═══════════════════════════════════════════════════════ */}
             {activeTab === 'experience' && (
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
                 {/* Action Bar */}
                 <div className="flex items-center justify-between mb-6">
                   <div>
@@ -629,12 +642,12 @@ const AdminDashboard = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </motion.div>
             )}
           </>
         )}
       </main>
-    </div>
+    </motion.div>
   );
 };
 

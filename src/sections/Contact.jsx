@@ -1,16 +1,17 @@
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter, FaGlobe, FaArrowUp } from 'react-icons/fa';
+import { FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter, FaGlobe, FaArrowUp } from 'react-icons/fa';
+import designBg from '../assets/design_bg.png';
 
 const contactInfo = [
-  { icon: <FaEnvelope size={16} />, label: '44kamrulhasan@gmail.com', href: 'mailto:44kamrulhasan@gmail.com' },
-  { icon: <FaPhone size={16} />, label: '+880-XXXX-XXXXXX', href: 'tel:+880' },
-  { icon: <FaMapMarkerAlt size={16} />, label: 'Based in Bangladesh', href: null },
+  { icon: <FaWhatsapp size={16} />, label: '+8801792965705', href: 'https://wa.me/8801792965705' },
+  { icon: <FaEnvelope size={16} />, label: 'k.hasanfaysal@gmail.com', href: 'mailto:k.hasanfaysal@gmail.com' },
+  { icon: <FaMapMarkerAlt size={16} />, label: 'Savar, Dhaka, Bangladesh', href: null },
 ];
 
 const socialLinks = [
-  { icon: <FaGithub size={20} />, label: 'GitHub', href: 'https://github.com' },
-  { icon: <FaLinkedin size={20} />, label: 'LinkedIn', href: 'https://linkedin.com' },
-  { icon: <FaTwitter size={20} />, label: 'Twitter', href: 'https://twitter.com' },
+  { icon: <FaGithub size={20} />, label: 'GitHub', href: 'https://github.com/khfaysal' },
+  { icon: <FaLinkedin size={20} />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/kamrulhasanfaysal/' },
+  { icon: <FaTwitter size={20} />, label: 'Twitter', href: 'https://x.com/44kamrulhasan' },
 ];
 
 const Contact = () => {
@@ -82,7 +83,12 @@ const Contact = () => {
                   </div>
                   <div className="flex flex-col">
                     {item.href ? (
-                      <a href={item.href} className="text-text-secondary text-sm hover:text-text-primary transition-colors leading-tight">
+                      <a
+                        href={item.href}
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="text-text-secondary text-sm hover:text-text-primary transition-colors leading-tight"
+                      >
                         {item.label}
                       </a>
                     ) : (
@@ -93,20 +99,36 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* Back to Top / Website Details Card */}
-            <div className="glass-card rounded-3xl p-6 flex items-center justify-between hover:border-purple-primary/20 transition-all duration-300">
-              <div className="flex flex-col">
-                <span className="text-[10px] font-mono text-purple-light uppercase tracking-wider">Site URL</span>
-                <span className="text-xs font-mono text-text-muted mt-0.5">kamrulhasan.dev</span>
+            {/* Design Portfolio / Back to Top Card */}
+            <a
+              href="https://kh-2por.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card rounded-3xl p-6 flex items-center justify-between hover:border-purple-primary/20 transition-all duration-300 relative overflow-hidden group/card cursor-pointer"
+            >
+              {/* Design Portfolio Background Overlay */}
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-[0.25] pointer-events-none group-hover/card:opacity-[0.45] transition-opacity duration-500"
+                style={{ backgroundImage: `url(${designBg})` }}
+              />
+              <div className="flex flex-col relative z-10">
+                <span className="text-xs font-mono text-purple-light uppercase tracking-wider group-hover/card:text-purple-primary transition-colors">Design Portfolio</span>
+                <span className="text-xs font-mono text-text-muted opacity-70 mt-1 flex items-center gap-1.5 transition-all group-hover/card:opacity-100 group-hover/card:text-text-secondary">
+                  kh-2por.netlify.app <span className="text-[10px] group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5 transition-transform">↗</span>
+                </span>
               </div>
               <button
-                onClick={scrollToTop}
-                className="w-11 h-11 rounded-2xl bg-bg-elevated border border-border-default flex items-center justify-center text-text-secondary hover:text-purple-primary hover:border-purple-primary/40 hover:scale-105 transition-all duration-300 group"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  scrollToTop();
+                }}
+                className="w-12 h-12 rounded-2xl bg-bg-elevated border border-border-default flex items-center justify-center text-text-secondary hover:text-purple-primary hover:border-purple-primary/40 hover:scale-105 transition-all duration-300 group relative z-20"
                 title="Scroll to top"
               >
                 <FaArrowUp size={14} className="group-hover:-translate-y-0.5 transition-transform" />
               </button>
-            </div>
+            </a>
           </motion.div>
         </div>
 
