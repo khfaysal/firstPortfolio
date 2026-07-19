@@ -72,7 +72,7 @@ const Toolkit = () => {
             <motion.div
               key={tool.name}
               variants={itemVariants}
-              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              whileHover={{ y: -3, scale: 1.05 }}
               className="glass-card rounded-xl p-3 flex flex-col items-center justify-center gap-2 group hover:border-purple-primary/30 transition-all duration-300 cursor-default"
             >
               {/* Icon — monochrome white/gray, small */}

@@ -70,17 +70,18 @@ const ToolkitProcessCTA = () => {
 
             <div className="grid grid-cols-4 gap-2">
               {tools.map((tool) => (
-                <div
+                <motion.div
                   key={tool.name}
-                  className="flex flex-col items-center gap-1 p-1.5 rounded-lg bg-bg-elevated/50 border border-border-default/50 hover:border-purple-primary/20 transition-all duration-300 group cursor-default"
+                  whileHover={{ y: -3, scale: 1.05 }}
+                  className="flex flex-col items-center gap-1 p-1.5 rounded-lg bg-bg-elevated/50 border border-border-default/50 hover:border-purple-primary/30 hover:bg-bg-elevated transition-all duration-300 group cursor-default shadow-sm hover:shadow-purple-primary/5"
                 >
-                  <span className="text-text-muted text-sm group-hover:text-purple-light transition-colors">
+                  <span className="text-text-muted text-sm group-hover:text-purple-light transition-colors duration-300">
                     {tool.icon}
                   </span>
-                  <span className="text-text-muted text-[7.5px] uppercase tracking-wider font-medium group-hover:text-text-secondary transition-colors text-center leading-tight">
+                  <span className="text-text-muted text-[7.5px] uppercase tracking-wider font-medium group-hover:text-text-secondary transition-colors text-center leading-tight duration-300">
                     {tool.name}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
