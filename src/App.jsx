@@ -28,7 +28,7 @@ const PageLoader = () => (
 const PortfolioPage = () => (
   <div className="relative min-h-screen bg-bg-primary">
     <Navbar />
-    <main>
+    <main className="overflow-x-hidden w-full relative">
       <Hero />
       <WhatIDo />
       <Projects />

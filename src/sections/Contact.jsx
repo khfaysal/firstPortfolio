@@ -33,7 +33,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-8 glass-card rounded-3xl p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:border-purple-primary/20 transition-all duration-300"
+            className="lg:col-span-8 glass-card rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:border-purple-primary/20 transition-all duration-300"
           >
             {/* Ambient Background Grid Glow */}
             <div className="absolute -top-24 -left-24 w-72 h-72 bg-purple-primary/5 rounded-full blur-[80px] pointer-events-none" />
@@ -75,7 +75,7 @@ const Contact = () => {
             className="lg:col-span-4 flex flex-col gap-6"
           >
             {/* Quick Contact Info */}
-            <div className="glass-card rounded-3xl p-8 flex-grow flex flex-col justify-center gap-6 hover:border-purple-primary/20 transition-all duration-300">
+            <div className="glass-card rounded-3xl p-6 sm:p-8 flex-grow flex flex-col justify-center gap-6 hover:border-purple-primary/20 transition-all duration-300">
               {contactInfo.map((item, i) => (
                 <div key={i} className="flex items-center gap-4 group">
                   <div className="w-10 h-10 rounded-xl bg-bg-elevated border border-border-default flex items-center justify-center text-purple-primary shrink-0 group-hover:bg-purple-primary/10 transition-all duration-300">

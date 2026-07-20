@@ -48,12 +48,12 @@ const WhatIDo = () => {
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
           variants={containerVariants}
-          className="grid grid-cols-1 lg:grid-cols-5 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4"
         >
-          {/* Left — Title Card (1 col) */}
+          {/* Left — Title Card (1 col, spans 2 cols on tablet) */}
           <motion.div
             variants={itemVariants}
-            className="glass-card rounded-2xl p-7 flex flex-col justify-center"
+            className="glass-card rounded-2xl p-7 flex flex-col justify-center md:col-span-2 lg:col-span-1"
           >
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-text-primary leading-tight uppercase">
               What<br />

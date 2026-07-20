@@ -4,8 +4,8 @@ import profileImg from '../assets/Photo-2.jpg';
 
 const stats = [
   { value: '1+', label: 'Years Experience' },
-  { value: '10+', label: 'Projects Delivered' },
-  { value: '5+', label: 'Happy Clients' },
+  { value: '2+', label: 'Projects Delivered' },
+  { value: '2+', label: 'Happy Clients' },
   { value: '12+', label: 'Technologies' },
 ];
 
@@ -28,6 +28,19 @@ const Hero = () => {
           
           {/* LEFT COLUMN: Texts (7 cols on large screens) */}
           <div className="lg:col-span-7 flex flex-col justify-center z-30 relative select-none">
+            {/* Name Subtitle */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-4 flex items-center gap-3"
+            >
+              <span className="h-px w-8 bg-purple-primary" />
+              <span className="text-gradient-purple text-sm font-heading font-black uppercase tracking-[0.3em]">
+                KAMRUL HASAN
+              </span>
+            </motion.div>
+
             {/* "CREATIVE" */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -80,6 +93,18 @@ const Hero = () => {
                 />
               </div>
             </motion.div>
+
+            {/* About Me snippet */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mt-6 max-w-3xl select-text"
+            >
+              <p className="text-text-muted text-xs sm:text-sm leading-relaxed">
+                I am <strong className="text-text-primary font-bold">Kamrul Hasan</strong>, a Software Engineering student and passionate Frontend Developer who enjoys building modern, responsive, and user-friendly web applications. I primarily work with React, JavaScript, Tailwind CSS, and Vite, and I am continuously learning backend technologies to become a skilled Full Stack Developer.
+              </p>
+            </motion.div>
           </div>
 
           {/* RIGHT COLUMN: Photo + Monogram (5 cols on large screens) */}
@@ -88,7 +113,7 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-[280px] h-[360px] sm:w-[320px] sm:h-[420px] md:w-[340px] md:h-[440px]"
+              className="relative w-[230px] h-[295px] min-[380px]:w-[280px] min-[380px]:h-[360px] sm:w-[320px] sm:h-[420px] md:w-[340px] md:h-[440px]"
             >
               {/* Purple glow behind photo */}
               <div className="absolute -inset-4 bg-gradient-to-br from-purple-primary/20 via-purple-glow/10 to-transparent rounded-3xl blur-xl opacity-60 pointer-events-none" />
@@ -107,7 +132,7 @@ const Hero = () => {
               </div>
 
               {/* Monogram Badge (CD) */}
-              <div className="absolute -bottom-6 -right-6 z-40 w-20 h-20 sm:w-24 sm:h-24">
+              <div className="absolute -bottom-4 -right-4 min-[380px]:-bottom-6 min-[380px]:-right-6 z-40 w-16 h-16 min-[380px]:w-20 min-[380px]:h-20 sm:w-24 sm:h-24">
                 <div className="absolute inset-0 animate-[spin_25s_linear_infinite] pointer-events-none">
                   <svg viewBox="0 0 200 200" className="w-full h-full">
                     <defs>
@@ -121,17 +146,17 @@ const Hero = () => {
                   </svg>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-bg-card border-2 border-purple-primary/20 flex items-center justify-center shadow-lg">
-                    <span className="text-xs sm:text-sm font-heading font-bold text-purple-light uppercase">KH</span>
+                  <div className="w-10 h-10 min-[380px]:w-12 min-[380px]:h-12 sm:w-14 sm:h-14 rounded-full bg-bg-card border-2 border-purple-primary/20 flex items-center justify-center shadow-lg">
+                    <span className="text-[10px] min-[380px]:text-xs sm:text-sm font-heading font-bold text-purple-light uppercase">KH</span>
                   </div>
                 </div>
               </div>
 
               {/* Status Badge (Available for projects) */}
-              <div className="absolute -left-6 bottom-8 z-30 bg-bg-card/90 backdrop-blur-sm border border-border-default rounded-xl p-3 shadow-xl">
+              <div className="absolute -left-4 bottom-8 min-[380px]:-left-6 z-30 bg-bg-card/90 backdrop-blur-sm border border-border-default rounded-xl p-2.5 sm:p-3 shadow-xl">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-purple-primary"></span>
-                  <span className="text-text-secondary text-[8px] sm:text-[9px] uppercase tracking-widest font-semibold font-mono leading-tight">
+                  <span className="text-text-secondary text-[7px] min-[380px]:text-[8px] sm:text-[9px] uppercase tracking-widest font-semibold font-mono leading-tight">
                     Available<br />For Projects
                   </span>
                 </div>

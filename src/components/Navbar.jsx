@@ -40,10 +40,10 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Left - Brand Tag */}
-        <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-2 group">
-          <span className="text-purple-primary text-lg">✦</span>
-          <span className="text-text-primary font-heading font-bold text-sm tracking-[0.2em] uppercase">
-            Creative Developer
+        <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-1.5 group">
+          <span className="text-purple-primary text-base group-hover:rotate-90 transition-transform duration-300">✦</span>
+          <span className="text-gradient-purple font-signature text-3xl tracking-wide py-1 leading-normal">
+            khfaysal
           </span>
         </a>
 

@@ -60,7 +60,7 @@ const ToolkitProcessCTA = () => {
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
           variants={containerVariants}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {/* ─── LEFT: My Toolkit ──────────────────────────────── */}
           <motion.div variants={itemVariants} className="glass-card rounded-2xl p-6">
@@ -121,7 +121,7 @@ const ToolkitProcessCTA = () => {
           {/* ─── RIGHT: CTA Card ──────────────────────────────── */}
           <motion.div
             variants={itemVariants}
-            className="glass-card rounded-2xl p-6 relative overflow-hidden group hover:border-purple-primary/30 transition-all duration-500 flex flex-col justify-center"
+            className="glass-card rounded-2xl p-6 relative overflow-hidden group hover:border-purple-primary/30 transition-all duration-500 flex flex-col justify-center md:col-span-2 lg:col-span-1"
           >
             {/* Glow orb */}
             <div className="absolute -top-16 -right-16 w-48 h-48 bg-purple-primary/10 rounded-full blur-[50px] group-hover:bg-purple-primary/20 transition-all duration-500" />

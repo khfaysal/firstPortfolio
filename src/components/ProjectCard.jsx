@@ -58,8 +58,8 @@ const ProjectCard = ({ project, index }) => {
             </button>
           )}
 
-          {/* Hover Overlay with links */}
-          <div className="absolute inset-0 bg-bg-primary/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+          {/* Hover Overlay with links (desktop only) */}
+          <div className="absolute inset-0 bg-bg-primary/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex items-center justify-center gap-3">
             {screenshots.length > 0 && (
               <button
                 onClick={() => setShowGallery(true)}
@@ -124,6 +124,42 @@ const ProjectCard = ({ project, index }) => {
                 {tag}
               </span>
             ))}
+          </div>
+
+          {/* Mobile/Tablet Actions (Visible only under lg breakpoint) */}
+          <div className="mt-auto pt-4 flex items-center justify-between gap-2 lg:hidden border-t border-border-default/30 mt-5">
+            {screenshots.length > 0 && (
+              <button
+                onClick={() => setShowGallery(true)}
+                className="px-3 py-1.5 rounded-lg bg-purple-primary text-white text-[10px] font-semibold uppercase tracking-wider hover:bg-purple-glow transition-all"
+              >
+                View Gallery
+              </button>
+            )}
+            <div className="flex gap-2 ml-auto">
+              {project.githubLink && (
+                <a
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-bg-elevated flex items-center justify-center text-text-secondary hover:text-text-primary border border-border-default transition-all"
+                  title="Source Code"
+                >
+                  <FaGithub size={14} />
+                </a>
+              )}
+              {project.liveLink && (
+                <a
+                  href={project.liveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-bg-elevated flex items-center justify-center text-text-secondary hover:text-text-primary border border-border-default transition-all"
+                  title="Live Site"
+                >
+                  <FaExternalLinkAlt size={12} />
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </motion.div>
