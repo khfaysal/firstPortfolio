@@ -24,9 +24,12 @@ const Navbar = () => {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    window.history.pushState(null, '', href);
     const el = document.querySelector(href);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
   };
 
@@ -101,7 +104,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden glass border-t border-border-default"
+            className="md:hidden absolute top-full left-0 w-full glass border-t border-border-default overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (

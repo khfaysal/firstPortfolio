@@ -20,7 +20,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative py-20 bg-bg-primary">
+    <section id="contact" className="relative py-20 bg-bg-primary scroll-mt-20">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-primary/20 to-transparent" />
 
       <div className="max-w-[1400px] mx-auto px-6">

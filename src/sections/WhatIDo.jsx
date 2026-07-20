@@ -39,7 +39,7 @@ const itemVariants = {
 
 const WhatIDo = () => {
   return (
-    <section id="services" className="relative section-padding bg-bg-primary">
+    <section id="services" className="relative section-padding bg-bg-primary scroll-mt-20">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-primary/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto">
