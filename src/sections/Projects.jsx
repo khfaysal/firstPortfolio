@@ -14,7 +14,8 @@ const Projects = () => {
     const loadProjects = async () => {
       try {
         const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
-        const { db } = await import('../firebase');
+        const { getDb } = await import('../firebase');
+        const db = await getDb();
         
         const q = query(collection(db, 'projects'), orderBy('order', 'asc'));
         const snapshot = await getDocs(q);
@@ -100,20 +101,22 @@ const Projects = () => {
           </motion.div>
         )}
 
-        {/* See More hint */}
-        {!showAll && additionalProjects.length > 0 && (
+        {/* See More / Show Less Button */}
+        {additionalProjects.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="mt-10 text-center"
+            className="mt-12 text-center"
           >
             <button
-              onClick={() => setShowAll(true)}
-              className="px-8 py-3 rounded-full border border-purple-primary/30 text-purple-light text-sm font-medium hover:bg-purple-primary/10 hover:border-purple-primary/50 transition-all duration-300 group"
+              onClick={() => setShowAll(!showAll)}
+              className="px-8 py-3 rounded-full border border-purple-primary/30 text-purple-light hover:text-text-primary text-sm font-medium hover:bg-purple-primary/10 hover:border-purple-primary/50 transition-all duration-300 group inline-flex items-center gap-2"
             >
-              See More Projects
-              <span className="inline-block ml-2 group-hover:translate-y-0.5 transition-transform">↓</span>
+              {showAll ? 'Show Less' : 'See More Projects'}
+              <span className={`inline-block transition-transform duration-300 ${showAll ? 'rotate-180' : 'group-hover:translate-y-0.5'}`}>
+                ↓
+              </span>
             </button>
           </motion.div>
         )}

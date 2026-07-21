@@ -1,8 +1,9 @@
-import { db } from '../src/firebase.js';
+import { getDb } from '../src/firebase.js';
 import { collection, getDocs } from 'firebase/firestore';
 
 async function inspectDatabase() {
   try {
+    const db = await getDb();
     const snapshot = await getDocs(collection(db, 'projects'));
     console.log('--- FIRESTORE PROJECTS ---');
     snapshot.docs.forEach(doc => {

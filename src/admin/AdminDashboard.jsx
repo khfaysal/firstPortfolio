@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../firebase';
 import {
   collection, addDoc, updateDoc, deleteDoc, doc,
   getDocs, query, orderBy, serverTimestamp,
@@ -10,6 +9,7 @@ import {
 import {
   FaPlus, FaEdit, FaTrash, FaSignOutAlt, FaSave, FaTimes,
   FaStar, FaBriefcase, FaProjectDiagram, FaCloudUploadAlt,
+  FaChevronLeft, FaChevronRight,
 } from 'react-icons/fa';
 
 // Cloudinary Configuration
@@ -59,14 +59,31 @@ const AdminDashboard = () => {
   const [showExpForm, setShowExpForm] = useState(false);
 
   // ─── Shared state ───────────────────────────────────────────────
+  const [db, setDb] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [notification, setNotification] = useState('');
 
+  // ─── Initialize Database ────────────────────────────────────────
+  useEffect(() => {
+    const initDb = async () => {
+      try {
+        const { getDb } = await import('../firebase');
+        const dbInstance = await getDb();
+        setDb(dbInstance);
+      } catch (err) {
+        console.error('Failed to initialize database:', err);
+        setLoading(false);
+      }
+    };
+    initDb();
+  }, []);
+
   // ─── Fetch data ─────────────────────────────────────────────────
   const fetchProjects = async () => {
     try {
+      if (!db) return;
       const q = query(collection(db, 'projects'), orderBy('order', 'asc'));
       const snapshot = await getDocs(q);
       setProjects(snapshot.docs.map(d => ({ id: d.id, ...d.data() })));
@@ -77,6 +94,7 @@ const AdminDashboard = () => {
 
   const fetchExperiences = async () => {
     try {
+      if (!db) return;
       const q = query(collection(db, 'experiences'), orderBy('order', 'asc'));
       const snapshot = await getDocs(q);
       setExperiences(snapshot.docs.map(d => ({ id: d.id, ...d.data() })));
@@ -86,12 +104,13 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
+    if (!db) return;
     const loadAll = async () => {
       await Promise.all([fetchProjects(), fetchExperiences()]);
       setLoading(false);
     };
     loadAll();
-  }, []);
+  }, [db]);
 
   const showNotif = (msg) => {
     setNotification(msg);
@@ -174,6 +193,46 @@ const AdminDashboard = () => {
     } finally {
       setUploading(false);
     }
+  };
+
+  // Move screenshot up/down in the list order
+  const moveScreenshot = (index, direction) => {
+    let currentScreenshots = [];
+    if (projectForm.screenshots) {
+      if (Array.isArray(projectForm.screenshots)) {
+        currentScreenshots = [...projectForm.screenshots];
+      } else if (typeof projectForm.screenshots === 'string') {
+        currentScreenshots = projectForm.screenshots.split(',').map(s => s.trim()).filter(Boolean);
+      }
+    }
+    
+    const targetIndex = index + direction;
+    if (targetIndex < 0 || targetIndex >= currentScreenshots.length) return;
+    
+    const temp = currentScreenshots[index];
+    currentScreenshots[index] = currentScreenshots[targetIndex];
+    currentScreenshots[targetIndex] = temp;
+    
+    const screenshotsString = currentScreenshots.join(', ');
+    setProjectForm(prev => ({ ...prev, screenshots: screenshotsString }));
+    showNotif('Image order updated!');
+  };
+
+  // Delete screenshot from the list
+  const deleteScreenshot = (index) => {
+    let currentScreenshots = [];
+    if (projectForm.screenshots) {
+      if (Array.isArray(projectForm.screenshots)) {
+        currentScreenshots = [...projectForm.screenshots];
+      } else if (typeof projectForm.screenshots === 'string') {
+        currentScreenshots = projectForm.screenshots.split(',').map(s => s.trim()).filter(Boolean);
+      }
+    }
+    
+    currentScreenshots.splice(index, 1);
+    const screenshotsString = currentScreenshots.join(', ');
+    setProjectForm(prev => ({ ...prev, screenshots: screenshotsString }));
+    showNotif('Image removed from gallery.');
   };
 
   // ═══════════════════════════════════════════════════════════════
@@ -499,20 +558,68 @@ const AdminDashboard = () => {
                                 placeholder="Comma separated URLs"
                               />
                             </div>
-                            {projectForm.screenshots && (
-                              <div className="flex flex-wrap gap-2 mt-2">
-                                {(Array.isArray(projectForm.screenshots) 
-                                  ? projectForm.screenshots 
-                                  : typeof projectForm.screenshots === 'string'
-                                    ? projectForm.screenshots.split(',').map(s => s.trim()).filter(Boolean)
-                                    : []
-                                ).map((url, idx) => (
-                                  <div key={idx} className="relative w-16 h-12 rounded-lg overflow-hidden border border-border-default group">
-                                    <img src={url} alt={`Screenshot Preview ${idx + 1}`} className="w-full h-full object-cover" />
+                            {projectForm.screenshots && (() => {
+                              const list = Array.isArray(projectForm.screenshots) 
+                                ? projectForm.screenshots 
+                                : typeof projectForm.screenshots === 'string'
+                                  ? projectForm.screenshots.split(',').map(s => s.trim()).filter(Boolean)
+                                  : [];
+                              if (list.length === 0) return null;
+                              return (
+                                <div className="mt-4 flex flex-col gap-2">
+                                  <span className="text-text-secondary text-[11px] font-medium tracking-wide">Manage Image Sequence</span>
+                                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                                    {list.map((url, idx) => (
+                                      <motion.div
+                                        key={`${url}-${idx}`}
+                                        layout
+                                        className="relative aspect-video rounded-xl overflow-hidden border border-border-default bg-bg-elevated/40 group hover:border-purple-primary/30 transition-all flex flex-col justify-end"
+                                      >
+                                        <img src={url} alt={`Screenshot ${idx + 1}`} className="absolute inset-0 w-full h-full object-cover z-0" />
+                                        
+                                        {/* Image Index Badge */}
+                                        <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-lg bg-bg-primary/80 backdrop-blur-md border border-border-default text-[10px] font-mono font-bold text-purple-light z-10">
+                                          #{idx + 1}
+                                        </div>
+
+                                        {/* Remove Button */}
+                                        <button
+                                          type="button"
+                                          onClick={() => deleteScreenshot(idx)}
+                                          className="absolute top-2 right-2 w-6 h-6 rounded-lg bg-red-500/10 hover:bg-red-500 hover:text-white backdrop-blur-md border border-red-500/20 text-red-400 flex items-center justify-center transition-all cursor-pointer z-10 lg:opacity-0 lg:group-hover:opacity-100"
+                                          title="Remove Image"
+                                        >
+                                          <FaTimes size={10} />
+                                        </button>
+
+                                        {/* Sequence Controls */}
+                                        <div className="relative z-10 w-full bg-bg-primary/80 backdrop-blur-md border-t border-border-default/40 py-1 px-2 flex justify-between items-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-200">
+                                          <button
+                                            type="button"
+                                            disabled={idx === 0}
+                                            onClick={() => moveScreenshot(idx, -1)}
+                                            className="p-1 rounded bg-bg-elevated/50 hover:bg-purple-primary/20 text-text-secondary hover:text-purple-light disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-text-secondary transition-colors"
+                                            title="Move Left"
+                                          >
+                                            <FaChevronLeft size={10} />
+                                          </button>
+                                          <span className="text-[9px] font-mono text-text-muted">Pos {idx + 1}</span>
+                                          <button
+                                            type="button"
+                                            disabled={idx === list.length - 1}
+                                            onClick={() => moveScreenshot(idx, 1)}
+                                            className="p-1 rounded bg-bg-elevated/50 hover:bg-purple-primary/20 text-text-secondary hover:text-purple-light disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-text-secondary transition-colors"
+                                            title="Move Right"
+                                          >
+                                            <FaChevronRight size={10} />
+                                          </button>
+                                        </div>
+                                      </motion.div>
+                                    ))}
                                   </div>
-                                ))}
-                              </div>
-                            )}
+                                </div>
+                              );
+                            })()}
                           </div>
 
                           <InputField label="GitHub Link" name="githubLink" value={projectForm.githubLink} onChange={handleProjectChange} placeholder="https://github.com/..." />

@@ -24,7 +24,8 @@ const Experience = () => {
     const loadExperiences = async () => {
       try {
         const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
-        const { db } = await import('../firebase');
+        const { getDb } = await import('../firebase');
+        const db = await getDb();
         
         const q = query(collection(db, 'experiences'), orderBy('order', 'asc'));
         const snapshot = await getDocs(q);

@@ -1,6 +1,5 @@
 // Firebase configuration
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -16,8 +15,15 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Firestore database
-export const db = getFirestore(app);
+// Lazy Firestore database loader
+let dbInstance = null;
+export const getDb = async () => {
+  if (!dbInstance) {
+    const { getFirestore } = await import('firebase/firestore');
+    dbInstance = getFirestore(app);
+  }
+  return dbInstance;
+};
 
 // Authentication
 export const auth = getAuth(app);

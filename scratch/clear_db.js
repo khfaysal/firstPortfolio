@@ -1,8 +1,9 @@
-import { db } from '../src/firebase.js';
+import { getDb } from '../src/firebase.js';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 async function clearProjects() {
   try {
+    const db = await getDb();
     const snapshot = await getDocs(collection(db, 'projects'));
     console.log(`Found ${snapshot.size} projects. Deleting...`);
     
