@@ -27,7 +27,7 @@ const Experience = () => {
       <div className="site-shell">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="section-heading-grid">
           <p className="section-index">04 / Experience</p>
-          <h2>Learning through<br />building.</h2>
+          <h2><span className="heading-accent">Learning through</span><span className="heading-outline">building.</span></h2>
           <p className="section-summary">A timeline of professional work and hands-on experience creating digital products.</p>
         </motion.div>
 

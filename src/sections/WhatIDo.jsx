@@ -14,7 +14,7 @@ const WhatIDo = () => (
     <div className="site-shell">
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} className="section-heading-grid">
         <p className="section-index">01 / About</p>
-        <h2>Design thinking.<br />Engineering discipline.</h2>
+        <h2><span className="heading-accent">Design thinking.</span><span className="heading-outline">Engineering discipline.</span></h2>
         <p className="section-summary">I design, build, and ship creative websites and web applications that are fast, responsive, and focused on the people who use them.</p>
       </motion.div>
 

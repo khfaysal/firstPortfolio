@@ -35,7 +35,7 @@ const Projects = () => {
       <div className="site-shell">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="section-heading-grid">
           <p className="section-index">02 / Selected work</p>
-          <h2>Projects built<br />with intent.</h2>
+          <h2><span className="heading-accent">Projects built</span><span className="heading-outline">with intent.</span></h2>
           <p className="section-summary">A selection of digital products combining clear interfaces, responsive engineering, and practical outcomes.</p>
         </motion.div>
 
