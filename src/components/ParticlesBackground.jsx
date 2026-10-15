@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
+import Particles from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 
 const ParticlesBackground = () => {

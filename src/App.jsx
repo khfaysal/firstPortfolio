@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 
 // Components
 import Navbar from './components/Navbar';
+import MeetMe from './components/MeetMe';
 
 // Sections
 import Hero from './sections/Hero';
@@ -19,7 +20,7 @@ const AdminDashboard = lazy(() => import('./admin/AdminDashboard'));
 const AdminRoute = lazy(() => import('./admin/AdminRoute'));
 
 const PageLoader = () => (
-  <div className="min-h-screen bg-bg-primary flex items-center justify-center">
+  <div className="min-h-screen bg-bg-primary flex items-center justify-center" role="status" aria-label="Loading page">
     <div className="w-10 h-10 border-2 border-purple-primary/30 border-t-purple-primary rounded-full animate-spin" />
   </div>
 );
@@ -28,7 +29,7 @@ const PageLoader = () => (
 const PortfolioPage = () => (
   <div className="relative min-h-screen bg-bg-primary">
     <Navbar />
-    <main className="overflow-x-hidden w-full relative">
+    <main className="w-full overflow-x-clip relative">
       <Hero />
       <WhatIDo />
       <Projects />
@@ -36,6 +37,7 @@ const PortfolioPage = () => (
       <Experience />
       <Contact />
     </main>
+    <MeetMe />
   </div>
 );
 
