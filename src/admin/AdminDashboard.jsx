@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +21,8 @@ const emptyProject = {
   title: '',
   description: '',
   category: '',
+  year: '',
+  role: '',
   tags: '',
   thumbnail: '',
   screenshots: '',
@@ -81,7 +83,7 @@ const AdminDashboard = () => {
   }, []);
 
   // ─── Fetch data ─────────────────────────────────────────────────
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       if (!db) return;
       const q = query(collection(db, 'projects'), orderBy('order', 'asc'));
@@ -90,9 +92,9 @@ const AdminDashboard = () => {
     } catch (err) {
       console.error('Error fetching projects:', err);
     }
-  };
+  }, [db]);
 
-  const fetchExperiences = async () => {
+  const fetchExperiences = useCallback(async () => {
     try {
       if (!db) return;
       const q = query(collection(db, 'experiences'), orderBy('order', 'asc'));
@@ -101,7 +103,7 @@ const AdminDashboard = () => {
     } catch (err) {
       console.error('Error fetching experiences:', err);
     }
-  };
+  }, [db]);
 
   useEffect(() => {
     if (!db) return;
@@ -110,7 +112,7 @@ const AdminDashboard = () => {
       setLoading(false);
     };
     loadAll();
-  }, [db]);
+  }, [db, fetchExperiences, fetchProjects]);
 
   const showNotif = (msg) => {
     setNotification(msg);
@@ -510,6 +512,8 @@ const AdminDashboard = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                           <InputField label="Title *" name="title" value={projectForm.title} onChange={handleProjectChange} placeholder="Project name" required />
                           <InputField label="Category" name="category" value={projectForm.category} onChange={handleProjectChange} placeholder="e.g. Web Design & Development" />
+                          <InputField label="Year" name="year" value={projectForm.year || ''} onChange={handleProjectChange} placeholder="e.g. 2026" />
+                          <InputField label="Your Role" name="role" value={projectForm.role || ''} onChange={handleProjectChange} placeholder="e.g. Frontend Developer" />
                           
                           <div className="md:col-span-2">
                             <TextareaField label="Description" name="description" value={projectForm.description} onChange={handleProjectChange} placeholder="Brief description..." />

@@ -1,93 +1,45 @@
 import { motion } from 'framer-motion';
-import { FaPaintBrush, FaCode, FaMobileAlt, FaRocket } from 'react-icons/fa';
+import { FaCode, FaMobileAlt, FaPaintBrush, FaRocket } from 'react-icons/fa';
+import profileImg from '../assets/Photo-2.jpg';
 
 const services = [
-  {
-    icon: <FaPaintBrush size={22} />,
-    title: 'Web Design',
-    description: 'Eye-catching designs that combine creativity with strategy.',
-  },
-  {
-    icon: <FaCode size={22} />,
-    title: 'Web Development',
-    description: 'Clean, scalable code with modern frameworks and best practices.',
-  },
-  {
-    icon: <FaMobileAlt size={22} />,
-    title: 'UI/UX Design',
-    description: 'Intuitive interfaces designed for seamless user experiences.',
-  },
-  {
-    icon: <FaRocket size={22} />,
-    title: 'Optimization',
-    description: 'Speed, SEO and performance tweaks that drive results.',
-  },
+  { icon: <FaPaintBrush />, number: '01', title: 'Web Design', description: 'Eye-catching designs that combine creativity with strategy.' },
+  { icon: <FaCode />, number: '02', title: 'Web Development', description: 'Clean, scalable code with modern frameworks and best practices.' },
+  { icon: <FaMobileAlt />, number: '03', title: 'UI/UX Design', description: 'Intuitive interfaces designed for seamless user experiences.' },
+  { icon: <FaRocket />, number: '04', title: 'Optimization', description: 'Speed, SEO, and performance improvements that drive results.' },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
+const WhatIDo = () => (
+  <section id="about" className="editorial-section scroll-mt-24">
+    <div className="site-shell">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} className="section-heading-grid">
+        <p className="section-index">01 / About</p>
+        <h2>Design thinking.<br />Engineering discipline.</h2>
+        <p className="section-summary">I design, build, and ship creative websites and web applications that are fast, responsive, and focused on the people who use them.</p>
+      </motion.div>
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 15 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-};
+      <div className="about-layout">
+        <motion.figure initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="about-portrait">
+          <img src={profileImg} alt="Kamrul Hasan" />
+          <figcaption><span>Based in Bangladesh</span><span>Available worldwide</span></figcaption>
+        </motion.figure>
 
-const WhatIDo = () => {
-  return (
-    <section id="services" className="relative section-padding bg-bg-primary scroll-mt-20">
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-primary/20 to-transparent" />
-
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4"
-        >
-          {/* Left — Title Card (1 col, spans 2 cols on tablet) */}
-          <motion.div
-            variants={itemVariants}
-            className="glass-card rounded-2xl p-7 flex flex-col justify-center md:col-span-2 lg:col-span-1"
-          >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-text-primary leading-tight uppercase">
-              What<br />
-              <span className="text-gradient-purple">I Do</span>
-            </h2>
-            <p className="text-text-muted text-xs mt-3 leading-relaxed">
-              I design, build and ship creative websites and web applications that are fast, responsive and user-focused.
-            </p>
-            <div className="h-1 w-12 bg-gradient-purple rounded-full mt-4" />
-          </motion.div>
-
-          {/* Right — 4 Service Cards in a row */}
-          {services.map((service) => (
-            <motion.div
-              key={service.title}
-              variants={itemVariants}
-              whileHover={{ y: -3, transition: { duration: 0.2 } }}
-              className="glass-card rounded-2xl p-5 group hover:border-purple-primary/30 transition-all duration-300 cursor-default flex flex-col"
-            >
-              <div className="w-10 h-10 rounded-lg bg-purple-primary/10 flex items-center justify-center text-purple-primary mb-4 group-hover:bg-purple-primary/20 transition-all duration-300">
-                {service.icon}
-              </div>
-              <h3 className="text-text-primary font-heading font-semibold text-sm mb-2 uppercase tracking-wide">
-                {service.title}
-              </h3>
-              <p className="text-text-muted text-xs leading-relaxed">
-                {service.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="about-copy">
+          <p className="about-lead">I turn ideas into clear, responsive interfaces with a balance of visual character and dependable frontend engineering.</p>
+          <p>I primarily work with React, JavaScript, Tailwind CSS, and Vite, and I am continuously learning backend technologies to become a skilled Full Stack Developer.</p>
+          <div className="services-grid">
+            {services.map((service) => (
+              <article key={service.title} className="service-card">
+                <div><span>{service.number}</span><i aria-hidden="true">{service.icon}</i></div>
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default WhatIDo;
