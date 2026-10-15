@@ -1,0 +1,98 @@
+{
+  "hash": "c9b7ef67",
+  "configHash": "55d48945",
+  "lockfileHash": "25748a42",
+  "browserHash": "6ec1e3a5",
+  "optimized": {
+    "firebase/app": {
+      "src": "../../node_modules/firebase/app/dist/esm/index.esm.js",
+      "file": "firebase_app.js",
+      "fileHash": "9e955c34",
+      "needsInterop": false
+    },
+    "firebase/auth": {
+      "src": "../../node_modules/firebase/auth/dist/esm/index.esm.js",
+      "file": "firebase_auth.js",
+      "fileHash": "1e712b36",
+      "needsInterop": false
+    },
+    "firebase/firestore": {
+      "src": "../../node_modules/firebase/firestore/dist/esm/index.esm.js",
+      "file": "firebase_firestore.js",
+      "fileHash": "6f658c5d",
+      "needsInterop": false
+    },
+    "framer-motion": {
+      "src": "../../node_modules/framer-motion/dist/es/index.mjs",
+      "file": "framer-motion.js",
+      "fileHash": "1ff1f05f",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "8124fe36",
+      "needsInterop": true
+    },
+    "react-icons/fa": {
+      "src": "../../node_modules/react-icons/fa/index.mjs",
+      "file": "react-icons_fa.js",
+      "fileHash": "397b1b03",
+      "needsInterop": false
+    },
+    "react-icons/si": {
+      "src": "../../node_modules/react-icons/si/index.mjs",
+      "file": "react-icons_si.js",
+      "fileHash": "d660c6ca",
+      "needsInterop": false
+    },
+    "react-icons/tb": {
+      "src": "../../node_modules/react-icons/tb/index.mjs",
+      "file": "react-icons_tb.js",
+      "fileHash": "7db78f4b",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "8d6731bc",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "727cd340",
+      "needsInterop": true
+    },
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "031c2f26",
+      "needsInterop": true
+    },
+    "typewriter-effect": {
+      "src": "../../node_modules/typewriter-effect/dist/react.js",
+      "file": "typewriter-effect.js",
+      "fileHash": "5727582c",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "iconBase-DyMD-nhT": {
+      "file": "iconBase-DyMD-nhT.js",
+      "isDynamicEntry": false
+    },
+    "index.esm-D8YsY7ZK": {
+      "file": "index.esm-D8YsY7ZK.js",
+      "isDynamicEntry": false
+    },
+    "react-dom-DXLdtIKz": {
+      "file": "react-dom-DXLdtIKz.js",
+      "isDynamicEntry": false
+    },
+    "react-qyqGnMJH": {
+      "file": "react-qyqGnMJH.js",
+      "isDynamicEntry": false
+    }
+  }
+}
