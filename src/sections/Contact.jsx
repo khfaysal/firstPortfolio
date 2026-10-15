@@ -24,7 +24,7 @@ const Contact = () => (
 
       <div className="contact-footer">
         <div className="social-list">
-          {socialLinks.map(([label, href]) => <a key={label} href={href} target="_blank" rel="noreferrer" className="focus-ring">{label}<span>↗</span></a>)}
+          {socialLinks.map(([label, href]) => <a key={label} href={href} target="_blank" rel="noreferrer" className={`focus-ring ${label === 'Design portfolio' ? 'design-portfolio-footer-link' : ''}`}>{label}<span>↗</span></a>)}
         </div>
         <div className="footer-meta"><span>Savar, Dhaka, Bangladesh</span><span>© {new Date().getFullYear()} Kamrul Hasan</span><a href="#home">Back to top ↑</a></div>
       </div>
