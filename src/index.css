@@ -251,11 +251,16 @@
 .social-list a { display: flex; justify-content: space-between; padding: 1rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #8c8a85; font: 500 .62rem/1.2 'Fira Code', monospace; text-transform: uppercase; transition: color .2s, background .2s; }
 .social-list a:hover { background: #151618; color: var(--ink); }
 .social-list a span { color: var(--accent); }
+.social-list .design-portfolio-footer-link { border-color: #d95b42; background: #d95b42; color: #fff; font-weight: 600; }
+.social-list .design-portfolio-footer-link:hover { background: #f26a4d; color: #fff; }
+.social-list .design-portfolio-footer-link span { color: #0b0c0e; }
 .footer-meta { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1.5rem; color: #5f5f5c; font: 500 .56rem/1.4 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .06em; }
 
 /* Meet me */
 .meet-me { position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 80; }
-.meet-button { display: flex; min-width: 8.3rem; align-items: center; justify-content: space-between; gap: .7rem; padding: .85rem 1rem; border: 1px solid rgba(231,228,223,.2); background: var(--ink); color: #0b0c0e; font: 600 .64rem/1 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .07em; cursor: pointer; box-shadow: 0 14px 38px rgba(0,0,0,.3); }
+.meet-button { position: relative; isolation: isolate; display: flex; min-width: 8.3rem; align-items: center; justify-content: space-between; gap: .7rem; padding: .85rem 1rem; border: 1px solid rgba(231,228,223,.2); background: var(--ink); color: #0b0c0e; font: 600 .64rem/1 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .07em; cursor: pointer; box-shadow: 0 14px 38px rgba(0,0,0,.3); }
+.meet-button::before, .meet-button::after { content: ''; position: absolute; z-index: -1; inset: -2px; border: 1px solid rgba(217, 91, 66, .8); pointer-events: none; animation: meet-wave 2.4s cubic-bezier(.2,.65,.3,1) infinite; }
+.meet-button::after { animation-delay: 1.2s; }
 .meet-button .status-dot { width: .4rem; height: .4rem; margin: 0; box-shadow: none; }
 .meet-button b { color: var(--accent); font-size: 1rem; }
 .meet-menu { position: absolute; right: 0; bottom: calc(100% + .65rem); width: min(20rem, calc(100vw - 2rem)); padding: .75rem; border: 1px solid var(--line); background: #111214; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
@@ -307,6 +312,10 @@
 }
 
 @keyframes pulse { 50% { opacity: .3; transform: scale(.8); } }
+@keyframes meet-wave {
+  0% { opacity: .75; transform: scale(1); }
+  75%, 100% { opacity: 0; transform: scale(1.32, 1.55); }
+}
 
 @media (min-width: 768px) {
   .menu-toggle, .mobile-nav { display: none !important; }
