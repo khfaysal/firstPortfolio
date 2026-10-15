@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 // Components
 import Navbar from './components/Navbar';
 import MeetMe from './components/MeetMe';
+import CursorEffect from './components/CursorEffect';
 
 // Sections
 import Hero from './sections/Hero';
@@ -38,6 +39,7 @@ const PortfolioPage = () => (
       <Contact />
     </main>
     <MeetMe />
+    <CursorEffect />
   </div>
 );
 

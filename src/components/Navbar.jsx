@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4 sm:top-5 sm:px-6">
-      <div ref={menuRef} className="editorial-nav mx-auto max-w-6xl">
+      <div ref={menuRef} className="editorial-nav mx-auto">
         <a href="#home" onClick={(event) => handleNavClick(event, '#home')} className="brand-mark focus-ring" aria-label="Kamrul Hasan, back to top">
           KH<span className="text-accent">.</span>
         </a>
@@ -61,9 +61,9 @@ const Navbar = () => {
           aria-controls="mobile-navigation"
           aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
         >
-          <span className={mobileMenuOpen ? 'translate-y-[5px] rotate-45' : ''} />
-          <span className={mobileMenuOpen ? 'opacity-0' : ''} />
-          <span className={mobileMenuOpen ? '-translate-y-[5px] -rotate-45' : ''} />
+          <span />
+          <span />
+          <span />
         </button>
 
         <AnimatePresence>

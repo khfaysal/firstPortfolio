@@ -13,7 +13,7 @@ const Contact = () => (
       <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="contact-main">
         <div>
           <p className="section-index">05 / Contact</p>
-          <h2>Have an idea?<br /><span>Let’s make it real.</span></h2>
+          <h2><span className="heading-accent">Have an idea?</span><span className="heading-outline">Let’s make it real.</span></h2>
         </div>
         <div className="contact-details">
           <p>I’m available for freelance projects and thoughtful collaborations. Tell me what you’re building.</p>

@@ -24,7 +24,7 @@ const ToolkitProcessCTA = () => (
     <div className="site-shell">
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="section-heading-grid">
         <p className="section-index">03 / Beyond the code</p>
-        <h2>Tools, process,<br />and visual craft.</h2>
+        <h2><span className="heading-accent">Tools, process,</span><span className="heading-outline">and visual craft.</span></h2>
         <p className="section-summary">A practical toolkit for moving from an early idea to a polished, production-ready digital experience.</p>
       </motion.div>
 
