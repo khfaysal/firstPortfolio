@@ -111,27 +111,19 @@
 .hero-glow { position: absolute; width: min(65vw, 58rem); aspect-ratio: 1; top: -35%; right: -8%; border-radius: 50%; background: radial-gradient(circle, rgba(242,106,77,.14), rgba(242,106,77,.035) 38%, transparent 68%); filter: blur(18px); }
 .eyebrow, .section-index, .panel-label { color: var(--accent); font: 500 clamp(.62rem, .8vw, .72rem)/1.4 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .14em; }
 .eyebrow span { color: #575759; padding-inline: .5rem; }
-.hero-name { margin: clamp(1rem, 2vh, 1.5rem) 0 0; font: 800 clamp(4.15rem, 9.6vw, 9.6rem)/.77 'Outfit', sans-serif; letter-spacing: -.075em; text-transform: uppercase; }
-.hero-title-grid { position: relative; display: block; }
-.hero-name { width: min(70%, 58rem); }
-.hero-side-column { position: absolute; top: 50%; right: 0; display: flex; width: min(27%, 24rem); flex-direction: column; align-items: center; justify-content: center; gap: clamp(3rem, 5vh, 4.5rem); transform: translateY(calc(-50% + 5rem)); }
+.hero-content-grid { display: grid; grid-template-columns: minmax(25rem, .88fr) minmax(32rem, 1.12fr); gap: clamp(.5rem, 1.5vw, 1.5rem); align-items: center; }
+.hero-copy { position: relative; z-index: 2; padding-bottom: 1rem; }
+.hero-name { margin: clamp(1rem, 2vh, 1.5rem) 0 0; font: 800 clamp(4.15rem, 8vw, 8rem)/.77 'Outfit', sans-serif; letter-spacing: -.075em; text-transform: uppercase; }
 .hero-name > span { display: block; width: max-content; max-width: 100%; }
-.hero-name > span:nth-child(2) { margin-left: clamp(0rem, 8vw, 8rem); }
+.hero-name > span:nth-child(2) { margin-left: clamp(0rem, 5.5vw, 5.5rem); }
 .hero-name .hero-name-outline { color: transparent; -webkit-text-stroke: clamp(1px, .09vw, 2px) rgba(231, 228, 223, .95); }
-.hero-lower-grid { display: grid; grid-template-columns: minmax(16rem, 1fr); margin: clamp(1.5rem, 3vh, 2.5rem) 0 2.2rem; }
+.hero-intro { margin-top: clamp(2rem, 4vh, 3rem); }
 .hero-intro > p { max-width: 36rem; color: #aaa7a1; font-size: clamp(.95rem, 1.25vw, 1.1rem); line-height: 1.75; }
 .button-primary, .button-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 1.3rem; min-height: 3rem; padding: 0 1.1rem; border: 1px solid var(--ink); font: 600 .68rem/1 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .07em; transition: .25s ease; }
 .button-primary { background: var(--ink); color: #0b0c0e; }
 .button-primary:hover { border-color: var(--accent); background: var(--accent); }
 .button-secondary { border-color: var(--line); color: var(--ink); }
 .button-secondary:hover { border-color: var(--accent); color: var(--accent); }
-.hero-signature { justify-self: center; align-self: center; text-align: center; }
-.hero-signature span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(231,228,223,.45); font: 800 clamp(4rem, 8vw, 7rem)/.9 'Outfit', sans-serif; letter-spacing: -.08em; }
-.hero-signature small { color: #666662; font: 500 .55rem/1 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .12em; }
-.hero-status { display: grid; width: 100%; gap: .9rem; align-self: center; }
-.hero-status > div { display: grid; grid-template-columns: 5.2rem 1fr; padding-bottom: .7rem; border-bottom: 1px solid var(--line); }
-.hero-status dt { color: #676764; font: 500 .6rem/1.4 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .09em; }
-.hero-status dd { margin: 0; color: #b8b5af; font-size: .75rem; }
 .status-dot { display: inline-block; width: .45rem; height: .45rem; margin-right: .45rem; border-radius: 50%; background: #7fbd73; box-shadow: 0 0 0 4px rgba(127,189,115,.08); }
 .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(1.5rem, 3vh, 2.5rem); border-top: 1px solid var(--line); }
 .hero-stats > div { display: flex; align-items: baseline; gap: .65rem; padding: 1.1rem 1rem 0 0; border-right: 1px solid var(--line); }
@@ -139,6 +131,27 @@
 .hero-stats > div:last-child { border-right: 0; }
 .hero-stats strong { color: var(--ink); font: 700 1.25rem/1 'Outfit', sans-serif; }
 .hero-stats span { color: #676764; font: 500 .57rem/1.3 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .07em; }
+
+/* Creative fingerprint */
+.creative-fingerprint { width: 100%; margin: 0; }
+.fingerprint-stage { position: relative; width: 100%; aspect-ratio: 760 / 500; background: radial-gradient(circle at 50% 50%, rgba(242,106,77,.075), transparent 33%); }
+.fingerprint-artwork { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.scan-rings circle { fill: none; stroke: rgba(231,228,223,.12); stroke-width: 1; stroke-dasharray: 2 5; }
+.fingerprint-frame path { fill: none; stroke: rgba(198,193,185,.52); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.fingerprint-image { opacity: .92; filter: contrast(1.06) saturate(.9) drop-shadow(0 0 5px rgba(242,106,77,.08)); }
+.fingerprint-orbit { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(242,106,77,.3)); }
+.fingerprint-connectors path { fill: none; stroke: rgba(231,228,223,.68); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.fingerprint-connectors circle { fill: var(--accent); }
+.diagram-icon { fill: none; stroke: #e7e4df; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
+.diagram-title { fill: #e7e4df; font: 600 11px 'Fira Code', monospace; letter-spacing: 1.5px; text-transform: uppercase; }
+.diagram-subtitle { fill: #85837e; font: 400 9.5px 'Inter', sans-serif; letter-spacing: .15px; }
+.fingerprint-mobile-callouts { display: none; }
+.creative-fingerprint figcaption { margin-top: -.25rem; text-align: center; text-transform: uppercase; }
+.creative-fingerprint figcaption p { display: flex; align-items: center; justify-content: center; gap: .8rem; margin: 0; color: #e1ded8; font: 500 clamp(.65rem, .85vw, .78rem)/1.2 'Fira Code', monospace; letter-spacing: .25em; }
+.creative-fingerprint figcaption p i { width: 2.7rem; height: 1px; background: var(--accent); }
+.creative-fingerprint figcaption p b { color: var(--accent); font-weight: 500; }
+.creative-fingerprint figcaption > span { display: block; margin-top: .8rem; color: #615f5b; font: 500 .58rem/1.3 'Fira Code', monospace; letter-spacing: .2em; }
+.creative-fingerprint figcaption em { color: #39393a; font-style: normal; }
 
 /* Shared headings */
 .section-heading-grid { display: grid; grid-template-columns: .7fr 1.7fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; margin-bottom: clamp(4rem, 8vw, 7rem); }
@@ -333,12 +346,9 @@
 }
 
 @media (max-width: 1023px) {
-  .hero-title-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
-  .hero-name { width: 100%; }
-  .hero-side-column { position: static; width: 100%; max-width: 52rem; align-items: stretch; gap: 3.5rem; transform: translateY(3rem); }
-  .hero-side-column .hero-signature { align-self: center; }
-  .hero-lower-grid { grid-template-columns: 1fr; }
-  .hero-status { grid-template-columns: repeat(3, 1fr); max-width: 52rem; }
+  .hero-content-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .hero-copy { max-width: 43rem; }
+  .creative-fingerprint { width: min(100%, 50rem); margin-inline: auto; }
   .section-heading-grid { grid-template-columns: .55fr 1.45fr; }
   .section-summary { grid-column: 2; }
   .case-study, .case-study-reverse { grid-template-columns: 1.15fr .85fr; gap: 3rem; }
@@ -354,12 +364,8 @@
   .menu-toggle { display: block; }
   .hero-section { min-height: auto; }
   .hero-name { font-size: clamp(3.75rem, 18vw, 6.4rem); line-height: .8; }
-  .hero-title-grid { grid-template-columns: 1fr; }
-  .hero-side-column { gap: 2.75rem; transform: translateY(1.5rem); }
   .hero-name > span:nth-child(2) { margin-left: 0; }
-  .hero-lower-grid { grid-template-columns: 1fr; gap: 2.5rem; margin-top: 3.5rem; }
-  .hero-signature { display: none; }
-  .hero-status { grid-template-columns: 1fr; transform: none; }
+  .hero-content-grid { gap: 2.25rem; }
   .hero-stats { grid-template-columns: repeat(2, 1fr); }
   .hero-stats > div { border-bottom: 1px solid var(--line); }
   .hero-stats > div:nth-child(2) { border-right: 0; }
@@ -384,8 +390,31 @@
   .footer-meta { flex-direction: column; }
 }
 
+@media (max-width: 600px) {
+  .hero-content-grid { gap: 1.5rem; }
+  .fingerprint-stage { aspect-ratio: 4 / 5; overflow: hidden; }
+  .fingerprint-artwork { top: 50%; left: 50%; width: 232%; height: 122%; transform: translate(-50%, -50%); }
+  .fingerprint-artwork .diagram-callout, .fingerprint-artwork .fingerprint-connectors { display: none; }
+  .fingerprint-mobile-callouts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: .75rem; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .fingerprint-mobile-callouts article { display: flex; min-width: 0; min-height: 7.25rem; flex-direction: column; padding: 1rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(17,18,20,.42); }
+  .fingerprint-mobile-callouts svg { color: var(--ink); font-size: 1.35rem; stroke-width: 1.4; }
+  .fingerprint-mobile-callouts strong { margin-top: auto; color: var(--ink); font: 600 .61rem/1.3 'Fira Code', monospace; text-transform: uppercase; letter-spacing: .08em; }
+  .fingerprint-mobile-callouts span { display: block; margin-top: .35rem; overflow: hidden; color: #777671; font-size: .57rem; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+  .creative-fingerprint figcaption { margin-top: 1.5rem; }
+  .creative-fingerprint figcaption p { gap: .55rem; font-size: .58rem; letter-spacing: .15em; }
+  .creative-fingerprint figcaption p i { width: 1.6rem; }
+  .creative-fingerprint figcaption > span { font-size: .48rem; letter-spacing: .14em; }
+}
+
 @media (max-width: 420px) {
   .hero-name { font-size: clamp(3.15rem, 17.5vw, 4.6rem); }
+  .hero-intro .button-primary, .hero-intro .button-secondary { width: 100%; }
+  .fingerprint-mobile-callouts article { min-height: 6.75rem; padding: .85rem; }
+  .fingerprint-mobile-callouts strong { font-size: .56rem; }
+  .fingerprint-mobile-callouts span { font-size: .52rem; }
+  .creative-fingerprint figcaption p { gap: .5rem; font-size: .55rem; letter-spacing: .14em; }
+  .creative-fingerprint figcaption p i { width: 1.4rem; }
+  .creative-fingerprint figcaption > span { font-size: .46rem; letter-spacing: .13em; }
   .hero-stats strong { font-size: 1rem; }
   .hero-stats span { font-size: .49rem; }
   .toolkit-grid { grid-template-columns: repeat(2, 1fr); }
