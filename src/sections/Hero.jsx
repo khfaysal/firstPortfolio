@@ -3,9 +3,9 @@ import CreativeFingerprint from '../components/CreativeFingerprint';
 
 const stats = [
   { value: '1+', label: 'Years experience' },
-  { value: '2+', label: 'Projects delivered' },
-  { value: '2+', label: 'Happy clients' },
+  { value: '4', label: 'Creative disciplines' },
   { value: '12+', label: 'Technologies' },
+  { value: 'Open', label: 'To opportunities' },
 ];
 
 const reveal = {
@@ -21,7 +21,7 @@ const Hero = () => (
       <div className="hero-content-grid">
         <div className="hero-copy">
           <motion.p custom={0} initial="hidden" animate="visible" variants={reveal} className="eyebrow">
-            Software Engineer
+            Frontend Developer <span aria-hidden="true">·</span> Software Engineering Student
           </motion.p>
 
           <h1 className="hero-name" aria-label="Kamrul Hasan">
@@ -30,9 +30,9 @@ const Hero = () => (
           </h1>
 
           <motion.div custom={0.3} initial="hidden" animate="visible" variants={reveal} className="hero-intro">
-            <p>I’m Kamrul Hasan, a Software Engineering student and frontend developer building modern, responsive, and user-friendly digital experiences. Beyond development, I’m also interested in research and enjoy exploring new ideas, asking thoughtful questions, and learning through investigation.</p>
+            <p>Software Engineering student and frontend developer crafting responsive, user-focused digital experiences while exploring research, thoughtful problem-solving, and new ideas that connect technology with meaningful design and creativity.</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a href="#projects" className="button-primary focus-ring">View selected work <span aria-hidden="true">↘</span></a>
+              <a href="#projects" className="button-primary focus-ring">Explore selected work <span aria-hidden="true">↘</span></a>
               <a href="https://github.com/khfaysal" target="_blank" rel="noreferrer" className="button-secondary focus-ring">GitHub <span aria-hidden="true">↗</span></a>
             </div>
           </motion.div>
