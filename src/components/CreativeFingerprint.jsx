@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { createElement } from 'react';
 import { FiCamera, FiCode, FiLayers, FiPenTool } from 'react-icons/fi';
 import fingerprintHero from '../assets/fingerprint-hero-v2.png';
 
@@ -96,9 +97,9 @@ const CreativeFingerprint = () => (
     </div>
 
     <div className="fingerprint-mobile-callouts" aria-label="Creative disciplines">
-      {mobileCallouts.map(({ title, text, icon: Icon }) => (
+      {mobileCallouts.map(({ title, text, icon }) => (
         <article key={title}>
-          <Icon aria-hidden="true" />
+          {createElement(icon, { 'aria-hidden': true })}
           <strong>{title}</strong>
           <span>{text}</span>
         </article>
